@@ -22,8 +22,8 @@ The entire dataset lives in a single minified JSON file with two top-level array
 
 ```json
 {
-  "points": [...],   // 683 geographic point records
-  "pops":   [...]    // 13,933 population/demand segment records
+  "points": [...],   // 682 geographic point records
+  "pops":   [...]    // 13,908 population/demand segment records
 }
 ```
 
@@ -86,11 +86,25 @@ Example:
 | `merged_<FIPS-like-code>`  | Aggregated census block group or geographic polygon           |
 | `merged_SO_<number>`       | Aggregated special-origin location (e.g., shopping, transit) |
 | `UNI_<INST>_<number>`      | University or institutional location                          |
+| `AIR_<CODE>`               | Airport location (e.g., `AIR_PVD` = Providence airport)      |
+| `ENT_<CODE>`               | Entertainment or venue location                               |
 
-Known university/institution codes observed in the data:
+Known university/institution codes:
 - `UNI_BU_*` — Brown University
+- `UNI_BRYU_*` — Brown University (alternate)
 - `UNI_RISD_*` — Rhode Island School of Design
-- `UNI_CCLC_*` — Community College of Rhode Island (or similar)
+- `UNI_CCLC_*` — Community College of Rhode Island (main campus)
+- `UNI_CCKC_*` — Community College of Rhode Island (Knight campus)
+- `UNI_CCFC_*` — Community College of Rhode Island (Flanagan campus)
+- `UNI_RIC_*` — Rhode Island College
+- `UNI_RWU_*` — Roger Williams University
+- `UNI_JAWU_*` — Johnson & Wales University
+- `UNI_PROV_*` — Providence College
+
+Known entertainment/venue codes:
+- `ENT_AMP` — Amphitheatre
+- `ENT_CBS` — Sports venue (e.g., Amica Mutual Pavilion)
+- `ENT_ZOO` — Roger Williams Park Zoo
 
 ### Population Segment IDs
 
@@ -101,7 +115,9 @@ Known university/institution codes observed in the data:
 ### Coordinate System
 
 - Coordinates follow **GeoJSON convention**: `[longitude, latitude]`
-- The bounding area corresponds to the Providence, RI metro region (approximately −71.5 to −71.3 longitude, 41.7 to 42.0 latitude)
+- The bounding area covers the Providence, RI metro region and surrounding municipalities:
+  - Longitude: approximately −71.549 to −71.247
+  - Latitude: approximately 41.646 to 41.925
 
 ---
 
@@ -116,8 +132,8 @@ import json
 with open("demand_data.json") as f:
     data = json.load(f)
 
-points = data["points"]   # list of 683 dicts
-pops   = data["pops"]     # list of 13,933 dicts
+points = data["points"]   # list of 682 dicts
+pops   = data["pops"]     # list of 13,908 dicts
 ```
 
 ### Node.js / JavaScript
